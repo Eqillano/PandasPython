@@ -22,7 +22,11 @@ df1 = df[df['duration'] >= '00:05:00']
 df1 = df1.groupby(['Member1_ID']).size().to_frame('count').reset_index().sort_values(['count'], ascending=[True])
 
 
-'''   ЗАДАНИЕ 2.5   '''
+'''   ЗАДАНИЕ 2.5
+
+Вывести список людей, отсортированный в обратном порядке по общей длительности
+контакта с другими людьми. '''
+
 
 df2 = df.groupby(['Member1_ID'])['duration'].sum().to_frame('sum_duration').reset_index().sort_values(['sum_duration'],ascending=[False])
 print(df2)

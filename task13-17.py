@@ -3,6 +3,7 @@ import pandas as pd
 dfbig = pd.read_json('TestJson/big_data_persons.json')
 dfsmall = pd.read_json('TestJson/small_data_persons.json')
 
+
 #print(dfsmall.head())
 
 '''
@@ -50,4 +51,3 @@ dupes = dfsmall[dfsmall['Last'].duplicated(keep=False)]
 
 dfenglish = dfsmall[dfsmall['First'].str.contains('[A-Za-z]') | dfsmall['Last'].str.contains('[A-Za-z]')]
 dfenglish.to_excel('contains_english_letters.xlsx')
-print(dfenglish)
