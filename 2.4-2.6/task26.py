@@ -4,8 +4,7 @@ import pandas as pd
 df = pd.read_json('json/small_data_contracts.json')
 df2 = pd.read_json('json/small_data_persons.json')
 
-#print(df.head())
-#print(df2.head())
+
 
 
 '''
@@ -24,7 +23,7 @@ dfx['To'] = pd.to_datetime(df['To'])
 #создаём колонку длительность контакта
 dfx['duration'] = dfx['To'] - dfx['From']
 
-# условеия что-бы контакт был больше двух минут
+# условие чтобы контакт был больше пяти минут
 dfx = dfx[dfx['duration'] >= '00:05:00']
 
 # убираем колонку
@@ -37,6 +36,7 @@ dfx.loc[(dfx.Age > 50),  'Возрастная Группа'] = '50-70'
 dfx.loc[(dfx.Age > 70),  'Возрастная Группа'] = '> 70'
 
 
-# группируем по возрстной группе и считаем общее кол-во людей в общей группе,сортируем в убывающем порядке
-dfxx = dfx.groupby(['Возрастная Группа'])['Member1_ID'].count().to_frame('кол-во').reset_index().sort_values(['кол-во'],ascending=[False])
-#Наиболее частый контакт имеет группа 18-30 лет
+# группируем по возрастной группе и считаем общее кол-во контактов в группе,сортируем в убывающем порядке
+dfx = dfx.groupby(['Возрастная Группа'])['Member1_ID'].count().to_frame('кол-во контактов').reset_index()\
+.sort_values(['кол-во контактов'],ascending=[False])
+#Наиболее частые контакты имеет группа 18-30 лет
